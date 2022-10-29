@@ -112,7 +112,7 @@ const LinkedList = () => {
         let count = 0
         while (current) {
             if (count == index) {
-                console.log(`node at ${index}`, current.data)
+                console.log(`node at ${index} is ~>[`, current.data, ']')
             }
             count++
             current = current.next
@@ -131,7 +131,7 @@ const LinkedList = () => {
             listArray.push(current.data)
             current = current.next
         }
-        console.log('Log: ~> file: LinkedListFunctional.js ~> line 134 ~> printListData ~> listArray', listArray.join(' ~> '))
+        console.log('Log: ~> file: LinkedListFunctional.js ~> line 134 ~> printListData ~> listArray[', listArray.join(' ] ~> [ ') ,']')
 
         console.log('size ~>', size)
     }
@@ -155,3 +155,10 @@ printListData()
 insertBefore('777', 98)
 
 printListData()
+
+//# OUTPUT
+// node at 2 is ~>[ 99 ]
+// Log: ~> file: LinkedListFunctional.js ~> line 134 ~> printListData ~> listArray[ 40 ] ~> [ 1 ] ~> [ 99 ] ~> [ 98 ] ~> [ 100 ]
+// size ~> 5
+// Log: ~> file: LinkedListFunctional.js ~> line 134 ~> printListData ~> listArray[ 40 ] ~> [ 1 ] ~> [ 99 ] ~> [ 777 ] ~> [ 98 ] ~> [ 100 ]
+// size ~> 6
