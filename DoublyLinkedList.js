@@ -96,7 +96,7 @@ const DLL = () => {
         let current = head;
         while (current) {
             console.log(
-                `${current.prev?.data} ~> ${current.data} ~> ${current.next?.data}`
+                `${current.prev?.data || '@'} ~> ${current.data} ~> ${current.next?.data || '@'}`
             );
             current = current.next;
         }
@@ -124,7 +124,6 @@ printDLL()
 deleteAt(2)
 console.log('-------------------deleteAt------------------')
 printDLL()
-
 getAt(3)
 
 
