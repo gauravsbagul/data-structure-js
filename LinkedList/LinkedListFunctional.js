@@ -55,6 +55,7 @@ const LinkedList = () => {
         previous.next = node
         size++
     }
+    
     //# [] => [] => [beforeData] => [] => []
     //#          <=    
     const insertBefore = (data, beforeData) => {
@@ -79,9 +80,7 @@ const LinkedList = () => {
                 break
             }
         }
-
     }
-
 
     const deleteAt = (index) => {
         if (index > 0 && index > size) {
@@ -131,7 +130,7 @@ const LinkedList = () => {
             listArray.push(current.data)
             current = current.next
         }
-        console.log('Log: ~> file: LinkedListFunctional.js ~> line 134 ~> printListData ~> listArray[', listArray.join(' ] ~> [ ') ,']')
+        console.log('Log: ~> file: LinkedListFunctional.js ~> line 134 ~> printListData ~> listArray[', listArray.join(' ] ~> [ '), ']')
 
         console.log('size ~>', size)
     }

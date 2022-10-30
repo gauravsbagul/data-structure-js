@@ -34,35 +34,37 @@ const BinaryTree = () => {
         console.log('Log: ~> file: BinaryTree.js ~> line 30 ~> printTree ~> tree', JSON.stringify(tree, undefined, 4))
     }
 
-    // Pre Order Travers AKA DFS
-    const preOrderTravers = (root) => {
+    // Pre Order preOrderTraversal AKA DFS
+    const preOrderArray = []
+    const preOrderTraversal = (root) => {
         if (!root) {
             return null
         }
-        console.log(root.data)
-        preOrderTravers(root.left)
-        preOrderTravers(root.right)
-
+        preOrderArray.push(root.data)
+        preOrderTraversal(root.left)
+        preOrderTraversal(root.right)
     }
 
-    // In Order Travers AKA DFS
-    const inOrderTravers = (root) => {
+    // In Order preOrderTraversal AKA DFS
+    const inOrderArray = []
+    const inOrderTraversal = (root) => {
         if (!root) {
             return null
         }
-        inOrderTravers(root.left)
-        console.log(root.data)
-        inOrderTravers(root.right)
+        inOrderTraversal(root.left)
+        inOrderArray.push(root.data)
+        inOrderTraversal(root.right)
     }
 
-    // Post Order Travers AKA DFS
-    const postOrderTravers = (root) => {
+    // Post Order preOrderTraversal AKA DFS
+    const postOrderArray = []
+    const postOrderTraversal = (root) => {
         if (!root) {
             return null
         }
-        postOrderTravers(root.left)
-        postOrderTravers(root.right)
-        console.log(root.data)
+        postOrderTraversal(root.left)
+        postOrderTraversal(root.right)
+        postOrderArray.push(root.data)
     }
 
     // Level Order AKA BFS
@@ -130,32 +132,15 @@ const BinaryTree = () => {
         return Math.max(leftHeight, rightHeight) + 1
     }
 
-    // Diameter of the tree recursive
+    // Diameter of the tree
     const diameterOfTree = (root) => {
         if (!root) {
             return 0
         }
         let diameterLeft = diameterOfTree(root.left)
         let diameterRight = diameterOfTree(root.right)
-        let diameterRoot = heightOfThree(root.left) + heightOfThree(root.right) + 1
+        let diameterRoot = heightOfTree(root.left) + heightOfTree(root.right) + 1
         return Math.max(diameterLeft, Math.max(diameterRight, diameterRoot))
-    }
-
-    // Diameter of the tree linear
-    const diameterOfTreeLinear = (root) => {
-        if (!root) {
-            return { height: 0, diameter: 0 }
-        }
-        let diameterLeft = diameterOfTreeLinear(root.left)
-        let diameterRight = diameterOfTreeLinear(root.right)
-
-        const height = Math.max(diameterLeft.height, diameterRight.height) + 1
-
-        const diam = diameterLeft.height + diameterRight.height + 1
-
-        const diameter = Math.max(diameterLeft.diameter, Math.max(diameterRight.diameter, diam))
-
-        return { height, diameter }
     }
 
     // Check for identical tree
@@ -233,7 +218,7 @@ const BinaryTree = () => {
 
     const eitherSideNodes = []
     let maxLevelR = 0
-    // Left side visible node
+    // Side visible node
     const eitherSideVisible = (root, level, side) => {
 
         const [first, second] = side === 'l' ? ['left', 'right'] : ['right', 'left']
@@ -264,7 +249,7 @@ const BinaryTree = () => {
 
         nodesArray.push(root)
         let count = 0
-        while (heightOfThree(root) >= count) {
+        while (heightOfTree(root) >= count) {
             const current = nodesArray[count]
             if (current) {
                 leftNodesView.push(current.data)
@@ -279,7 +264,7 @@ const BinaryTree = () => {
         }
     }
 
-
+    // Get all leaf nodes
     const leafs = []
     const leafNode = (root) => {
         if (!root) {
@@ -292,23 +277,27 @@ const BinaryTree = () => {
         leafNode(root.right)
     }
 
-    return { buildTree, printTree, preOrderTravers, inOrderTravers, postOrderTravers, levelOrder, countNodes, sumOfNodes, heightOfThree, diameterOfTree, diameterOfTreeLinear, isSubTree, replaceNode, searchNode, eitherSideVisible, eitherSideNodes, leftSideVisible, nodesArray, leftNodesView, leafNode, leafs ,  }
+    return { buildTree, printTree, preOrderTraversal, preOrderArray, inOrderTraversal, inOrderArray, postOrderTraversal, postOrderArray, levelOrder, countNodes, sumOfNodes, heightOfTree, diameterOfTree, isSubTree, replaceNode, searchNode, eitherSideVisible, eitherSideNodes, leftSideVisible, nodesArray, leftNodesView, leafNode, leafs }
 }
 
-const { buildTree, printTree, preOrderTravers, inOrderTravers, postOrderTravers, levelOrder, countNodes, sumOfNodes, heightOfThree, diameterOfTree, diameterOfTreeLinear, isSubTree, replaceNode, searchNode, eitherSideVisible, eitherSideNodes, leftSideVisible, leftSideNodes, leftNodesView, leafNode, leafs , } = BinaryTree()
+const { buildTree, printTree, preOrderTraversal, preOrderArray, inOrderTraversal, inOrderArray, postOrderTraversal, postOrderArray, levelOrder, countNodes, sumOfNodes, heightOfTree, diameterOfTree, isSubTree, replaceNode, searchNode, eitherSideVisible, eitherSideNodes, leftSideVisible, leftSideNodes, leftNodesView, leafNode, leafs } = BinaryTree()
 
 const root = buildTree(preOrder)
 
 printTree(root)
 
-console.log('Log: ~> file: BinaryTree.js ~> line 130 ~> preOrderTravers')
-preOrderTravers(root)
+console.log('Log: ~> file: BinaryTree.js ~> line 130 ~> preOrderTraversal')
+preOrderTraversal(root)
 
-console.log('Log: ~> file: BinaryTree.js ~> line 133 ~> inOrderTravers')
-inOrderTravers(root)
+console.log('Log: ~> file: BinaryTree.js ~> line 290 ~> preOrderArray', preOrderArray)
 
-console.log('Log: ~> file: BinaryTree.js ~> line 136 ~> postOrderTravers')
-postOrderTravers(root)
+console.log('Log: ~> file: BinaryTree.js ~> line 133 ~> inOrderTraversal')
+inOrderTraversal(root)
+console.log('Log: ~> file: BinaryTree.js ~> line 297 ~> inOrderArray', inOrderArray)
+
+console.log('Log: ~> file: BinaryTree.js ~> line 136 ~> postOrderTraversal')
+postOrderTraversal(root)
+console.log('Log: ~> file: BinaryTree.js ~> line 301 ~> postOrderArray', postOrderArray)
 
 console.log('Log: ~> file: BinaryTree.js ~> line 139 ~> levelOrder')
 levelOrder(root)
@@ -322,15 +311,11 @@ console.log('Log: ~> file: BinaryTree.js ~> line 102 ~> countNodes')
 const sum = sumOfNodes(root)
 console.log('Log: ~> file: BinaryTree.js ~> line 147 ~> sum', sum)
 
-const height = heightOfThee(root)
+const height = heightOfTree(root)
 console.log('Log: ~> file: BinaryTree.js ~> line 166 ~> height', height)
 
 const diameter = diameterOfTree(root)
 console.log('Log: ~> file: BinaryTree.js ~> line 179 ~> diameter', diameter)
-
-const diameterLinear = diameterOfTreeLinear(root)
-console.log('Log: ~> file: BinaryTree.js ~> line 208 ~> diameterLinear', diameterLinear)
-
 
 const subRoot = BinaryTree().buildTree(subTree)
 

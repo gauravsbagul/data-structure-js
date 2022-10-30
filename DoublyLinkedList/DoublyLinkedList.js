@@ -11,7 +11,6 @@ const DLL = () => {
     let tail = null
     let size = 0
 
-
     const insertFirst = (data) => {
         size++
         let node = Node(data, null, null)
@@ -49,7 +48,6 @@ const DLL = () => {
             }
             current = current.next
         }
-
     }
 
     const deleteAt = (index) => {
@@ -78,7 +76,6 @@ const DLL = () => {
         size--
     }
 
-
     const getAt = (index) => {
         let current = head
         let count = 0
@@ -91,7 +88,6 @@ const DLL = () => {
         }
     }
 
-
     const printDLL = () => {
         let current = head;
         while (current) {
@@ -101,11 +97,7 @@ const DLL = () => {
             current = current.next;
         }
     }
-
-
-
     return { insertFirst, printDLL, insertBefore, deleteAt, getAt }
-
 }
 
 const { insertFirst, printDLL, insertBefore, deleteAt, getAt } = DLL()

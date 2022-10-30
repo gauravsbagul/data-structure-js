@@ -28,9 +28,7 @@ const Stack = () => {
         console.log(item)
 
     }
-
     return { push, pop, pick, isEmpty, printStack }
-
 }
 
 const { push, pop, pick, isEmpty, printStack } = Stack()
@@ -48,6 +46,11 @@ const isEmptyStack = isEmpty()
 console.log('Log: ~> file: js ~> line 47 ~> isEmptyStack', isEmptyStack)
 printStack()
 
+//# OUTPUT
+// Log: ~> file: js ~> line 43 ~> picked 654
+// Log: ~> file: js ~> line 45 ~> popped 654
+// Log: ~> file: js ~> line 47 ~> isEmptyStack false
+// 2 ~> 4 ~> 6 ~> 12
 
 const postFix = (expression) => {
     const { push, pop } = Stack()
@@ -89,4 +92,3 @@ const postFix = (expression) => {
 console.log(postFix("123-+4+")); //# 4
 console.log(postFix("43*1+"));   //# 13
 console.log(postFix("43*1-+"));  //# Stack is Empty
-
