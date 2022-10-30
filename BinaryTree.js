@@ -119,13 +119,13 @@ const BinaryTree = () => {
     }
 
     // Height of Tree
-    const heightOfThree = (root) => {
+    const heightOfTree = (root) => {
         if (!root) {
             return 0
         }
 
-        const leftHeight = heightOfThree(root.left)
-        const rightHeight = heightOfThree(root.right)
+        const leftHeight = heightOfTree(root.left)
+        const rightHeight = heightOfTree(root.right)
 
         return Math.max(leftHeight, rightHeight) + 1
     }
@@ -322,7 +322,7 @@ console.log('Log: ~> file: BinaryTree.js ~> line 102 ~> countNodes')
 const sum = sumOfNodes(root)
 console.log('Log: ~> file: BinaryTree.js ~> line 147 ~> sum', sum)
 
-const height = heightOfThree(root)
+const height = heightOfThee(root)
 console.log('Log: ~> file: BinaryTree.js ~> line 166 ~> height', height)
 
 const diameter = diameterOfTree(root)
