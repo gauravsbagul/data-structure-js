@@ -11,11 +11,10 @@ const Node = (node, l = null, r = null) => {
 
 const BinarySearchTree = () => {
     let tree = null
-    let index = -1
-
+    const rangeArray = []
 
     const insertNode = (root, node) => {
-        if (!root) {
+        if (root === null) {
             return Node(node)
         }
 
@@ -39,7 +38,7 @@ const BinarySearchTree = () => {
 
     const searchNode = (root, searchQuery) => {
 
-        if (!root) {
+        if (root === null) {
             return null
         }
 
@@ -65,7 +64,7 @@ const BinarySearchTree = () => {
     }
 
     const printInOrder = (root) => {
-        if (!root) {
+        if (root === null) {
             return
         }
 
@@ -83,7 +82,7 @@ const BinarySearchTree = () => {
     }
 
     const deleteNodeData = (root, deleteQuery) => {
-        
+
         if (root.data > deleteQuery) {
             root.left = deleteNodeData(root.left, deleteQuery)
         } else if (root.data < deleteQuery) {
@@ -102,14 +101,55 @@ const BinarySearchTree = () => {
 
             let rightNode = getNextSuccessor(root.right)
             root.data = rightNode.data
-            return root.right = deleteNodeData(root.right, rightNode.data)
+            root.right = deleteNodeData(root.right, rightNode.data)
+            // return  root.right
         }
         return root
     }
-    return { generateTree, searchNode, printTree, deleteNodeData, printInOrder, }
+
+    const printInRange = (root, min, max) => {
+
+        if (root === null) {
+            return null
+        }
+
+        if (root.data >= min && root.data <= max) {
+            printInRange(root.left, min, max)
+            rangeArray.push(root.data)
+            printInRange(root.right, min, max)
+        } else if (root.data >= max) {
+            printInRange(root.left, min, max)
+        } else if (max <= root.data) {
+            printInRange(root.right, min, max)
+        }
+    }
+
+    const printRangeArray = () => rangeArray
+
+
+    const rootToLeaf = (root, path) => {
+
+        if (root === null) {
+            return null
+        }
+
+        path.push(root.data)
+
+        if (!root.left && !root.right) {
+            console.log('Log: ~> file: BinarySearchTree.js ~> line 138 ~> rootToLeaf ~> path', path.join(' ~> '))
+
+        } else {
+            rootToLeaf(root.left, path)
+            rootToLeaf(root.right, path)
+        }
+        path.splice(path.length - 1)// pending
+
+    }
+
+    return { generateTree, searchNode, printTree, deleteNodeData, printInOrder, printInRange, printRangeArray, rootToLeaf }
 }
 
-const { generateTree, searchNode, printTree, deleteNodeData, printInOrder, } = BinarySearchTree()
+const { generateTree, searchNode, printTree, deleteNodeData, printInOrder, printInRange, printRangeArray, rootToLeaf } = BinarySearchTree()
 
 let root = generateTree(arr)
 printTree(root)
@@ -120,3 +160,8 @@ const deletedNode = deleteNodeData(root, 5)
 console.log('Log: ~> file: BinarySearchTree.js ~> line 124 ~> deletedNode')
 printInOrder(deletedNode)
 printTree(searchResult)
+
+printInRange(root, 3, 10)
+console.log('Log: ~> file: BinarySearchTree.js ~> line 149 ~> BinarySearchTree.rangeArray', printRangeArray())
+ 
+rootToLeaf(root, [])
